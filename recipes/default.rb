@@ -4,13 +4,13 @@
 # Author:: Julian C. Dunn (<jdunn@opscode.com>)
 #
 # Copyright (C) 2013 Opscode, Inc.
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #    http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,7 +24,7 @@ remote_file File.join(Chef::Config[:file_cache_path], 'oracle-xe-11.2.0-1.0.x86_
 end
 
 # Pre-req for Oracle %preinstall scriptlet
-package "bc"
+package 'bc'
 
 yum_package 'oracle-xe' do
   source File.join(Chef::Config[:file_cache_path], 'oracle-xe-11.2.0-1.0.x86_64.rpm')
@@ -38,19 +38,19 @@ template rspfile do
   action :create
 end
 
-execute "autoconfigure-xe" do
+execute 'autoconfigure-xe' do
   command "/etc/init.d/oracle-xe configure responseFile=#{rspfile}"
-  creates "/u01/app/oracle/oradata"
-  returns [0,1] # don't care if it's already configured
+  creates '/u01/app/oracle/oradata'
+  returns [0, 1] # don't care if it's already configured
 end
 
-link "/etc/profile.d/oracle_env.sh" do
-  to "/u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh"
+link '/etc/profile.d/oracle_env.sh' do
+  to '/u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh'
   action :create
 end
 
-link "/etc/profile.d/oracle_env.csh" do
-  to "/u01/app/oracle/product/11.2.0/xe/bin/oracle_env.csh"
+link '/etc/profile.d/oracle_env.csh' do
+  to '/u01/app/oracle/product/11.2.0/xe/bin/oracle_env.csh'
   action :create
 end
 
@@ -63,7 +63,7 @@ template reset_sql do
   notifies :run, 'execute[unlock-oracle-system-accounts]', :immediately
 end
 
-execute "unlock-oracle-system-accounts" do
+execute 'unlock-oracle-system-accounts' do
   command "source /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh && sqlplus / as sysdba @#{reset_sql}"
   user 'oracle'
   group 'dba' # required
