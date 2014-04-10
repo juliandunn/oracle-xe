@@ -11,7 +11,6 @@ platforms:
 - name: centos-5.8
   driver_plugin: digitalocean
   driver_config:
-    image_id: 1601
     flavor_id: 63
     region_id: 4
     ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
@@ -20,7 +19,6 @@ platforms:
 - name: centos-6.5
   driver_plugin: digitalocean
   driver_config:
-    image_id: 1646467
     flavor_id: 63
     region_id: 4
     ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
