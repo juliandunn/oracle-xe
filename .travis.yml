@@ -22,4 +22,3 @@ env:
   matrix:
   - KITCHEN_INSTANCE='server-centos-58'
   - KITCHEN_INSTANCE='server-centos-65'
-  - KITCHEN_INSTANCE='server-fedora-19'
