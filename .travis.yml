@@ -20,5 +20,5 @@ env:
   - secure: YdAqRE3xdNXpun0Qhd6phwxOC7lKaP5W2ncOUZf4vjzZ7tQYRB6ZQtTRGWJLq8MwaBQGmFQ00pp9QHM6hg8js6AIlZ3PZ+z46gbQSLTzAfDmbnRDi1698gOhEJGoecPiDZ0O/cyGldi/qPNkQkvPvSM/4u6m94MS+rtvceMBjco=
   - secure: YvH3DxOndKmia7qfnhtQ44hZmKf1XUh6UkitFu8tDj33OfwHH0hhhU5dfvUHWvlK/uHywdLCBqSjSzkkLUeBSkx6VAiUr6xAYvAo0yp1w1O9GURsYyytSj6rJb5M5GwtvrZpFKOWg0KDb7JrPAWdsWQYnPEzu96Ai8UFo3TVV4Y=
   matrix:
-  - KITCHEN_INSTANCE='server-centos-58'
-  - KITCHEN_INSTANCE='server-centos-65'
+  - KITCHEN_INSTANCE='default-centos-58'
+  - KITCHEN_INSTANCE='default-centos-65'
