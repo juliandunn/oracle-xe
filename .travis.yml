@@ -1,0 +1,25 @@
+language: ruby
+bundler_args: --without kitchen_vagrant
+rvm:
+- 2.1.0
+before_install:
+- echo -n $DO_KEY_CHUNK_{0..30} >> ~/.ssh/id_do.base64
+- cat ~/.ssh/id_do.base64 | tr -d ' ' | base64 --decode > ~/.ssh/id_do.pem
+script:
+- bundle exec rake style
+- bundle exec rake spec
+- bundle exec kitchen test $KITCHEN_INSTANCE
+after_script:
+- bundle exec kitchen destroy $KITCHEN_INSTANCE
+env:
+  global:
+  - KITCHEN_YAML=.kitchen.cloud.yml
+  - DIGITAL_OCEAN_SSH_KEY_PATH=~/.ssh/id_do.pem
+  - secure: eC30+t5g6p8ufVATNdt7xNyY5ZXDRgeapEwWyl+ld/wDyX/6hspUG018WyYnYPlrjq9I6xKqxCtAHMzUcstk+80xDOii5ATPvVdf5bmN6tnpcrmJLAWVGQW/dNccVJKwi44z64HpfhfIrRoWnt9zTGKq1L8GRpblwfwV5DahXfM=
+  - secure: TTD1dOAUFe9dQDMEHmrjQq635uBxRQGuIEUaPgJBJ712hS4bZmcvkp43zP5N9h/RuTMQeRqrVdjxcDAfTLQrrq7sF0a3PX7k5jmmF2mI/RbDEJi5nuzGXvekpHZ0m5ZJFa5MrQhFp6auIXFSamAnqntL0FcfHnlobWgn7eEKMmM=
+  - secure: YdAqRE3xdNXpun0Qhd6phwxOC7lKaP5W2ncOUZf4vjzZ7tQYRB6ZQtTRGWJLq8MwaBQGmFQ00pp9QHM6hg8js6AIlZ3PZ+z46gbQSLTzAfDmbnRDi1698gOhEJGoecPiDZ0O/cyGldi/qPNkQkvPvSM/4u6m94MS+rtvceMBjco=
+  - secure: YvH3DxOndKmia7qfnhtQ44hZmKf1XUh6UkitFu8tDj33OfwHH0hhhU5dfvUHWvlK/uHywdLCBqSjSzkkLUeBSkx6VAiUr6xAYvAo0yp1w1O9GURsYyytSj6rJb5M5GwtvrZpFKOWg0KDb7JrPAWdsWQYnPEzu96Ai8UFo3TVV4Y=
+  matrix:
+  - KITCHEN_INSTANCE='server-centos-58'
+  - KITCHEN_INSTANCE='server-centos-65'
+  - KITCHEN_INSTANCE='server-fedora-19'
