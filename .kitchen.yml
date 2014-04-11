@@ -1,7 +1,11 @@
----
-driver_plugin: vagrant
-driver_config:
-  require_chef_omnibus: true
+driver:
+  name: vagrant
+  customize:
+    memory: 512
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: latest
 
 platforms:
 - name: centos-6.5
@@ -10,4 +14,6 @@ platforms:
 suites:
 - name: default
   run_list: ["recipe[oracle-xe]"]
-  attributes: {}
+  attributes: 
+    oracle-xe:
+      url: http://10.0.2.2/~juliandunn/binaries/oracle-xe-11.2.0-1.0.x86_64.rpm
