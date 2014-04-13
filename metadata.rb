@@ -9,3 +9,5 @@ version          '0.1.0'
 %w(redhat centos).each do |p|
   supports p
 end
+
+depends 'swap'

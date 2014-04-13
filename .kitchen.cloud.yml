@@ -28,6 +28,7 @@ platforms:
 suites:
 - name: default
   run_list:
+  - recipe[oracle-xe_test]
   - recipe[oracle-xe]
   attributes:
     oracle-xe:
