@@ -18,5 +18,5 @@
 #
 
 swap_file '/swap' do
-  size 1024
+  size 1536
 end

@@ -13,7 +13,7 @@ platforms:
 
 suites:
 - name: default
-  run_list: ["recipe[oracle-xe]"]
+  run_list: ["recipe[oracle-xe_test]", "recipe[oracle-xe]"]
   attributes: 
     oracle-xe:
       url: http://10.0.2.2/~juliandunn/binaries/oracle-xe-11.2.0-1.0.x86_64.rpm
