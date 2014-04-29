@@ -21,7 +21,6 @@ platforms:
   driver_config:
     flavor_id: 62
     region_id: 4
-    image_id: 3102789
     ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
     ssh_key: <%= ENV['DIGITAL_OCEAN_SSH_KEY_PATH'] %>
 
