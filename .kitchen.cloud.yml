@@ -32,3 +32,6 @@ suites:
   attributes:
     oracle-xe:
       url: <%= ENV['ORACLE_XE_RPM_URL'] %>
+    yum:
+      main:
+        gpgcheck: false
