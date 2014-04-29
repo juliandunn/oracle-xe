@@ -1,5 +1,5 @@
 name             'oracle-xe'
-maintainer       'Opscode, Inc.'
+maintainer       'Chef Software, Inc.'
 maintainer_email 'jdunn@opscode.com'
 license          'Apache 2.0'
 description      'Installs Oracle Express Edition'
@@ -10,4 +10,4 @@ version          '0.1.0'
   supports p
 end
 
-depends 'swap'
+suggests 'swap'
