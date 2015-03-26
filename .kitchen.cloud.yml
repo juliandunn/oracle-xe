@@ -1,29 +1,13 @@
 ---
-driver_config:
-  digitalocean_client_id: <%= ENV['DIGITAL_OCEAN_CLIENT_ID'] %>
-  digitalocean_api_key: <%= ENV['DIGITAL_OCEAN_API_KEY'] %>
+driver:
+  name: digitalocean
 
 provisioner:
   name: chef_zero
   require_chef_omnibus: latest
 
-platforms:
-- name: centos-5.8
-  driver_plugin: digitalocean
-  driver_config:
-    flavor_id: 62
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-    ssh_key: <%= ENV['DIGITAL_OCEAN_SSH_KEY_PATH'] %>
-
-- name: centos-6.5
-  driver_plugin: digitalocean
-  driver_config:
-    flavor_id: 62
-    region_id: 4
-    image_id: 3240850
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-    ssh_key: <%= ENV['DIGITAL_OCEAN_SSH_KEY_PATH'] %>
+platforms:<% %w{centos-6-5-x64 centos-5-10-x64}.each do |p| %>
+- name: <%= p %><% end %>
 
 suites:
 - name: default
