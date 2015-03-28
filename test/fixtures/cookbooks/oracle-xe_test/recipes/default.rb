@@ -37,3 +37,13 @@ end
 swap_file '/swap' do
   size 2048
 end
+
+# Oracle configuration will fail if hostname does not resolve
+unless File.readlines('/etc/hosts').grep(/#{node['hostname']}/).size > 0
+  replace_or_add 'add_hostname_to_hosts' do
+    path '/etc/hosts'
+    pattern '127.0.0.1\s*localhost\s*.*'
+    line '127.0.0.1   localhost localhost.localdomain localhost4 '\
+         "localhost4.localdomain4 #{node['hostname']}"
+  end
+end
