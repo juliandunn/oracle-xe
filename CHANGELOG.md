@@ -1,3 +1,9 @@
+0.2.0 - April 9, 2016
+----------------------
+
+* Fix (by default faulty) job BSLN_MAINTAIN_STATS_JOB
+
+
 0.1.1 - April 28, 2014
 ----------------------
 
