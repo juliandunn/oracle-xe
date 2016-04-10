@@ -27,7 +27,8 @@ Include the default recipe in your run list after setting the URL attribute.
 * `node['oracle-xe']['http-port']` - The port where you want the HTTP interface to be listening.
 * `node['oracle-xe']['tnslsnr-port']` - The port where you want the TNS listener to be listening.
 * `node['oracle-xe']['oracle-password']`  - The password for the SYS and SYSTEM accounts.
-* `node['oracle-xe']['start-lsnr-on-boot']`  - Whether to start the TNS listener on bootup.
+* `node['oracle-xe']['start-lsnr-on-boot']`  - Whether to start the TNS listener on bootup (true | false).
+* `node['oracle-xe']['password-lifetime-default']`  - Password lifetime for users created with the default profile (int | "UNLIMITED"; default 180)
 
 # Recipes
 

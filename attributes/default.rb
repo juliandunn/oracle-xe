@@ -25,3 +25,4 @@ default['oracle-xe']['http-port'] = 8079
 default['oracle-xe']['tnslsnr-port'] = 1521
 default['oracle-xe']['oracle-password'] = 'password'
 default['oracle-xe']['start-lsnr-on-boot'] = true
+default['oracle-xe']['password-lifetime-default'] = 180
