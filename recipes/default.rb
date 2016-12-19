@@ -70,3 +70,17 @@ execute 'unlock-oracle-system-accounts' do
   group 'dba' # required
   action :nothing
 end
+
+fix_job_sql = File.join(Chef::Config[:file_cache_path], 'fix-job-BSLN_MAINTAIN_STATS_JOB.sql')
+
+template fix_job_sql do
+  action :create
+  notifies :run, 'execute[fix-job-BSLN_MAINTAIN_STATS_JOB]', :immediately
+end
+
+execute 'fix-job-BSLN_MAINTAIN_STATS_JOB' do
+  command "source /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh && cd $ORACLE_HOME/rdbms/admin && sqlplus / as sysdba @#{fix_job_sql}"
+  user 'oracle'
+  group 'dba' # required
+  action :nothing
+end

@@ -1,0 +1,10 @@
+@catnsnmp
+@catsnmp
+shutdown immediate;
+startup;
+
+-- Execute job again to remove FAILED entry
+exec dbms_scheduler.run_job('BSLN_MAINTAIN_STATS_JOB',false);
+
+exit;
+-- NOW I CAN STOP SHOUTING

@@ -25,3 +25,7 @@ default['oracle-xe']['http-port'] = 8079
 default['oracle-xe']['tnslsnr-port'] = 1521
 default['oracle-xe']['oracle-password'] = 'password'
 default['oracle-xe']['start-lsnr-on-boot'] = true
+default['oracle-xe']['password-lifetime-default'] = 180
+default['oracle-xe']['processes'] = 100
+default['oracle-xe']['sessions'] = 172
+default['oracle-xe']['transactions'] = 189
