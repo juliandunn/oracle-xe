@@ -24,6 +24,7 @@ Include the default recipe in your run list after setting the URL attribute.
 # Attributes
 
 * `node['oracle-xe']['url']` - The URL where you've placed the Oracle 11g Express Edition RPM.
+* `node['oracle-xe']['urldownload']` - Boolean whether to use url to download or use package resource (does not create a yum repo config file)
 * `node['oracle-xe']['http-port']` - The port where you want the HTTP interface to be listening.
 * `node['oracle-xe']['tnslsnr-port']` - The port where you want the TNS listener to be listening.
 * `node['oracle-xe']['oracle-password']`  - The password for the SYS and SYSTEM accounts.
