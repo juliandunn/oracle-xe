@@ -18,18 +18,22 @@
 # limitations under the License.
 #
 
-remote_file File.join(Chef::Config[:file_cache_path], 'oracle-xe-11.2.0-1.0.x86_64.rpm') do
-  source node['oracle-xe']['url']
-  action :create
-end
-
 # Pre-req for Oracle %preinstall scriptlet
 package 'bc'
 package 'libaio'
 
-yum_package 'oracle-xe' do
-  source File.join(Chef::Config[:file_cache_path], 'oracle-xe-11.2.0-1.0.x86_64.rpm')
-  action :install
+if node['oracle-xe']['urldownload']
+  remote_file File.join(Chef::Config[:file_cache_path], 'oracle-xe-11.2.0-1.0.x86_64.rpm') do
+    source node['oracle-xe']['url']
+    action :create
+  end
+
+  yum_package 'oracle-xe' do
+    source File.join(Chef::Config[:file_cache_path], 'oracle-xe-11.2.0-1.0.x86_64.rpm')
+    action :install
+  end
+else
+  package 'oracle-xe'
 end
 
 rspfile = File.join(Chef::Config[:file_cache_path], 'xe.rsp')
