@@ -12,10 +12,11 @@ branches:
   - master
 services: docker
 env:
+  global:
+  - secure: SRXrFQgm+kRZ0VsW2uO3yJLfe7a3DnlpivUgm460HNedSMHdiBqvQyFYSQ/5+KZyUYohUqizMHH7h0h+tdOvmS1nLHAOE4EMfTHV6LlNL5ZQNPQLDedlzQXduk/1UCoCS3v2qi+GFeK7LNm70PWM7CjryCtjEmu9/IMUKlMXLdk=
   matrix:
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
-  - secure: SRXrFQgm+kRZ0VsW2uO3yJLfe7a3DnlpivUgm460HNedSMHdiBqvQyFYSQ/5+KZyUYohUqizMHH7h0h+tdOvmS1nLHAOE4EMfTHV6LlNL5ZQNPQLDedlzQXduk/1UCoCS3v2qi+GFeK7LNm70PWM7CjryCtjEmu9/IMUKlMXLdk=
 before_script:
 - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables
   -N DOCKER )
