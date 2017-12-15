@@ -1,49 +1,31 @@
-language: ruby
-bundler_args: --without kitchen_vagrant
-rvm:
-- 2.1.1
-before_install:
-- echo -n $DO_KEY_CHUNK_{0..30} >> ~/.ssh/id_do.base64
-- cat ~/.ssh/id_do.base64 | tr -d ' ' | base64 --decode > ~/.ssh/id_do.pem
-script:
-- bundle exec rake style
-- bundle exec rake spec
-- bundle exec kitchen test $KITCHEN_INSTANCE
-after_script:
-- bundle exec kitchen destroy $KITCHEN_INSTANCE
+sudo: required
+dist: trusty
+addons:
+  apt:
+    sources:
+    - chef-current-trusty
+    packages:
+    - chefdk
+install: echo "skip bundle install"
+branches:
+  only:
+  - master
+services: docker
 env:
-  global:
-  - KITCHEN_YAML=.kitchen.cloud.yml
-  - DIGITAL_OCEAN_SSH_KEY_PATH=~/.ssh/id_do.pem
-  - secure: eC30+t5g6p8ufVATNdt7xNyY5ZXDRgeapEwWyl+ld/wDyX/6hspUG018WyYnYPlrjq9I6xKqxCtAHMzUcstk+80xDOii5ATPvVdf5bmN6tnpcrmJLAWVGQW/dNccVJKwi44z64HpfhfIrRoWnt9zTGKq1L8GRpblwfwV5DahXfM=
-  - secure: TTD1dOAUFe9dQDMEHmrjQq635uBxRQGuIEUaPgJBJ712hS4bZmcvkp43zP5N9h/RuTMQeRqrVdjxcDAfTLQrrq7sF0a3PX7k5jmmF2mI/RbDEJi5nuzGXvekpHZ0m5ZJFa5MrQhFp6auIXFSamAnqntL0FcfHnlobWgn7eEKMmM=
-  - secure: YdAqRE3xdNXpun0Qhd6phwxOC7lKaP5W2ncOUZf4vjzZ7tQYRB6ZQtTRGWJLq8MwaBQGmFQ00pp9QHM6hg8js6AIlZ3PZ+z46gbQSLTzAfDmbnRDi1698gOhEJGoecPiDZ0O/cyGldi/qPNkQkvPvSM/4u6m94MS+rtvceMBjco=
-  - secure: YvH3DxOndKmia7qfnhtQ44hZmKf1XUh6UkitFu8tDj33OfwHH0hhhU5dfvUHWvlK/uHywdLCBqSjSzkkLUeBSkx6VAiUr6xAYvAo0yp1w1O9GURsYyytSj6rJb5M5GwtvrZpFKOWg0KDb7JrPAWdsWQYnPEzu96Ai8UFo3TVV4Y=
-  - secure: KNFI+LQ7HN9I0l0TK1ltFrt4WLcRqYzYwuMj6xpWS6PKUmq9DMGudG0qWHwtS7wM1YStK4MDZbGYOEe5v67MF367yyJ22cyl/dsu8SUYL7y9CDSaKrTeM/SCxLCDRURzSDoz0Rk2849jx6S4LoHn65z6CparpnEi98sb+wzgzF4=
-  - secure: NwMcezY3zyGOONLoFS/4WvEfh3jMQ28+tzCDaDdzSX8zCJQPWlXhG+cBH5ldVJ+u8ihpUft921WECXaZE99OM8bIhilUMRbiROYeHSWdRz4tmMZQkZgSaRLZv3/dIrBTOnbxm72VG7ZaL222vIjclAYRAYQeuys99ywS327KVAE=
-  - secure: B54pvik62VlZfvyM2alJgXcTwxlPFNt6qvP29a4z8Un+ZW906SMFEoOr3a3Sm7DUEYz6rpQREk6bCDS5PEfUmkPuiDhJJ+yUpga4Ac5Srsjin5xrOWNK2E+95e9XRoJgVnl+lzfdO8M1fSgyPLldzMCk3aMDWn+shzVcXFCiRiI=
-  - secure: JC0ye+QCC21MBJREBrQy/uhiaAF9OyloIpHI9Vfr07vbmoIRT9kUKiJBhrcSqILzV0lDbMvmE2qxZ9V7y7ELmBmUhK426k+QsQmFr3Y0tC2qCoeAxvBsbXWgZP1yOswSsOzPmU53T38G8jPwOaiOhmAjxlOOaHzbOSjivOrEgeA=
-  - secure: Wi5Tw0+70y4OmKiM/HdU8RV8vz6qGdtzkmT0+ACku7xYHCG60ATSXfw3LlTrIjumU1KPy2PC4cFRafRCIwtKLFzQ+0EcoWJBtnyIWO6rWkSwXCBWPWRsnOOc6MQzitI1ELEAYkN9ewbGCw1INPzuP1AYvj/VW3hwwRuwDrwX/0k=
-  - secure: Z7YgbaN0qR3K4UxB3QJXuD9ZOWuNELMMFN26bC+9GPErDdySmqXeoOrkmDBInaeTf6NRSN0YWs2AQEKjXj4/oX1nPGoqEVyOJtvHU794T6LcKXepuhohCAJIpgIbqSiui+gBzs/h2Sw8thNjGbt+wk7WoTqP8rv1YihMgAR23/o=
-  - secure: EQaLCGwyGiMLZTdaYMywI2QGFPEzNQbCBoI6FEyTTWRmj/LIes6CXvYcTs5oRPzMCLda2U35XxnVUC4uJubiJQNM61m6c1WuaBekFlaWZlt9IGoqb5ol/TGHrs5a6pdTQM09RRz5VSLP3U9HCHYkLsuvIc+SsbSoA3RdogdsHqY=
-  - secure: VArUgztT6aUAIvMfNaieZWqHf3cFPkHYG7h0pwSvVKrHiQ0jNXa0DmatbGNwCW/OjYmVUY/xczSEjUO8un6xnIIIHe7+BGli0o4ndSnaRFXcGtiwr5tkilPwhBZjI6IRKZd3tZTzDG0NGKLcnj86diIkBXX9eV0JWqrpE+LY9T4=
-  - secure: dgQRimXvihE+JBjadtU360CWEz4QAn7xHNHhxouyF80GdEreKKg9RKodNHkbGn1S0ufADcf53VvCTvWL4YkYT7xEVnYo6VF/o0nid9eBE0OJ/tjBLrbaVBfCyt9Vob1//4trlV9baM3tWkgBk2DK9A3zotbgXk8sa5pkYRKk5sw=
-  - secure: E27QGQ5gll2bhDtbwRs8AnO8phCmv/mtHbIhZc/phIF1/Py0FWIzdCUK7nJxQZ25FSgtNB/PNSqtFd88fgPAcbJgO41xbqCRB6wBgMchfD03GvBx8WqKvOY0NRu0H4h7YpzoEEIjGS7PQOWbOsEziqvYBdwNJ2JUQmobEDUJaVA=
-  - secure: Bda61uPWmCfe0I1aIEW69NnqRzkBGkGExSbeBG+cKhM9T+X6xt2/7HSvijUQUJBEo8aefHSRk13919Mf1rMpVal/zW2vz+F6WAY9jvBgBBzhrYAeLxRDpYhBqgvxEGGdUnlhgzWfABWsxPwmt/dTT5RnrtldHsPxE9PEZssxRxA=
-  - secure: AI396ZlmhNAvIR+xwtFuoZa3TlttqO1y10tUHAog3wQmLxjQ5FUC4O1rpAJlwUZobeEUMA/ep+z4GqDJLYPDt61Kkq95y0YjTDB+sxZ64k/KY8ztwHNWo4NTcGFgmCA2rUldLerPUhx91FH3bIFIN7Qj4DYD48TVVm6jheQOmzA=
-  - secure: Sw8e4voFEvPhobWqZ3n/tGl+KL1vi5gZyf8/sn9i7KD+AIDzqR6G/Rzyfd1458/f1z0KQVd8viru2mfN90ariAmXYCpGcTtC/fUw8hEzC37GkGD+h/V7yBaa70TM5muSxcjAXhENX4cMli34GRg+nc6ZCzfq3WFp1bZYKsCiCjk=
-  - secure: PNl0s0GV4mMiwsZrpXJ8LJOHcS4KvyWaqLP54nuACl4Bo73hQSpcaVwpEHzRzWqyxs3rgoadRCD4nYWSOvNWgWrpFSe+xKxyqQv1iajk9rKYRbSeqK7kO5aqxtBK1LzzVVjPwa9ueFWy18L/whVH5oHWb4v3BphjjM/HAlPg7yI=
-  - secure: IIxkgEfwvvxRKNtv1V0Kg+Gt8Sy92xmgEtDpTLWsDc0YaVfOjTvebzmbzwNZUhTXiFj44Oi1DPAoKq+dC42pV4AY7A8zxuEoJy72FOusFRmyiCkKyMuHCYCfrzLDaAEJSpkjIm115+g5PqIHJgAUI3Dp7/7GBtOFgBTjiNu7YnU=
-  - secure: dFioKhT7x+9AzQaMlW5x7xJJW27F1q4UPcRlJXvoxOLyBgfZBoyE7y1UQBztiNeKKq6uVuMAvrqFqE4IfVwzDUPvUehCkiZaM7eoDQs4DDXahf4uQsOS7HPO2iVCTcYZSkCjyPRqv6Pv3HIhzbVBIKT5AF/Rq779SepF/vfH108=
-  - secure: gC15jxwKfzcar5cpXuUXmslvbuSwm9ZzVtkr1eyQspV4dGUSDCksye3lnd0JspcF8hDTzBxAq21/KKxE9bYMBHHGPxyJB8pVVVKLpvErgXacw1J9qtKTaHSCrp5jafXaYQcW3c6OHUhA9nfPJPN6/q6n0lvB3EN3sSjFjV4ySWM=
-  - secure: JQtILF1ZFe+i/6IqOg52Ktf6kRFI5t5Fa/i2Lff9ePpvkic9YPuFWvLeaQCHD440vw8hjoqbCL0g+l23wSe5BFrs1RD2uykJENxx5n6K5wqLne1CqL7Fjkd/qM620KUMDKtUYUUvozO6v8wtL7lft0kj8p5g8zBTpCtm6I5nvWc=
-  - secure: QIa5WOzEBwox1AXtF0Dnn+a2c3tP9DtGj4s1phi77Td7W8gb9mktkyijaCFgCvfWkAL6pXAxsYaEbxaiIC9MEbfdX4S8IxsyxjOPbZQbRXRK+08/gkEafAdHGmPY6IIUt0U3pbDskgo1LHT/w2gVbybYwKTsbMgK4skdU4DfCvk=
-  - secure: aLeqHxst+ZDve8sHqLlBmAvOSVw3pm31cfpgU+yFG/2MZlRugrpIKZkC7FmD202DFH3WyParyq5waInEOCyrMp6fFqkgNq9VtnwcnfCco15/tu7tfGj/9p5LFobKHVrKbinE+zIfxfA8XPXxfZof5DtO5EYMVlY46tZqpisn2yY=
-  - secure: irM09la3Eze/8sWuv5lpl63awu83AFmMrt05J4z2VTsrhv72K6pGw+QVlP6SatMHn3yJe+hNqJJbDRchYWk5ysex6fi8gGQ4izJOxhrqAt77ppVcxjH+bN8gUGsiQFBvX/VbXVwb829hH4fAFHqMMvewpcan/jV5kUpxJ+6haX8=
-  - secure: TnEG0bD2oftJjMHwB5I+s8qbH9ZePBbiso62YmGOv1piAoHGnhAicpB9+18pQqH8UYlt5OtC0OV3+Rs+DOQDb0H6aCKpYjQMinCNTEzVzVfGggjyxsh63DdbVMzXTlcK70pzkEGfzXSEZhsn6IFrderyBTGSgfUqMVrMGctsOu0=
-  - secure: VRWq1lfr9MK58oBcgycLgn/yu5dcweQrEg0tAuadYuHhgd5idUk+RWEey5xGvQ1ZIPtIv3AR1Tknzn6WgJgytogsOwVmNJSuay0nneOGJaZkRqXo9sfABGaPrt4a5GzPRARfXlKPq916kDOq1Pl8q/Ce3U4iNZGlkpaA1RSRYTc=
-  - secure: H/bQf/wKntJ/f/fEH91/luCV8KfQ/yja91gOTh4h+MYirPJ3tVQGEuWLFEvPBv4dKTne7udwYdfaQMwooDUu3r2syvJuCD2k0TpBb6TjZWSNCxrengBbPrq05Vw9eWPVW5f9Cq8ujldaY5My47HHgJJenCHm0RptYpJDzhoMp9M=
-  - secure: HASjTQMywjUQZ0fehN/tuIKCBOXyW7FMRK+eFChaV/OlqkPouYVsbqR5ef4O7Z0huOr9tlhxd2YKEYBxRCOnhIfJf8ZvtxqDWKo4tpsDaX4l6tBYYOxYZEUvNJdVDNrkhnRqeG6ACNB+lUo/SQoFADqXVUuYcXjDDE1EHOd8kVg=
   matrix:
-  - KITCHEN_INSTANCE='default-centos-58'
-  - KITCHEN_INSTANCE='default-centos-65'
+  - INSTANCE=default-centos-6
+  - INSTANCE=default-centos-7
+  - secure: SRXrFQgm+kRZ0VsW2uO3yJLfe7a3DnlpivUgm460HNedSMHdiBqvQyFYSQ/5+KZyUYohUqizMHH7h0h+tdOvmS1nLHAOE4EMfTHV6LlNL5ZQNPQLDedlzQXduk/1UCoCS3v2qi+GFeK7LNm70PWM7CjryCtjEmu9/IMUKlMXLdk=
+before_script:
+- sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables
+  -N DOCKER )
+- eval "$(chef shell-init bash)"
+- chef --version
+- cookstyle --version
+- foodcritic --version
+script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
+matrix:
+  include:
+  - script:
+    - chef exec delivery local all
+    env: UNIT_AND_LINT=1
