@@ -8,12 +8,11 @@ provisioner:
   require_chef_omnibus: latest
 
 platforms:
-- name: centos-6.5
-- name: centos-5.10
+- name: centos-6
 
 suites:
 - name: default
   run_list: ["recipe[oracle-xe_test]", "recipe[oracle-xe]"]
   attributes: 
     oracle-xe:
-      url: http://10.0.2.2/~juliandunn/binaries/oracle-xe-11.2.0-1.0.x86_64.rpm
+      url: https://d19aqaq2etoqgb.cloudfront.net/oracle-xe-11.2.0-1.0.x86_64.rpm

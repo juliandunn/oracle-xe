@@ -17,29 +17,8 @@
 # limitations under the License.
 #
 
-yum_globalconfig '/etc/yum.conf' do
-  cachedir node['yum']['main']['cachedir']
-  keepcache node['yum']['main']['keepcache']
-  debuglevel node['yum']['main']['debuglevel']
-  exclude node['yum']['main']['exclude']
-  gpgcheck node['yum']['main']['gpgcheck']
-  logfile node['yum']['main']['logfile']
-  exactarch node['yum']['main']['exactarch']
-  obsoletes node['yum']['main']['obsoletes']
-  proxy node['yum']['main']['proxy']
-  installonly_limit node['yum']['main']['installonly_limit']
-  installonlypkgs node['yum']['main']['installonlypkgs']
-  installroot node['yum']['main']['installroot']
-  distroverpkg node['yum']['main']['distroverpkg']
-  action :create
-end
-
-swap_file '/swap' do
-  size 2048
-end
-
 # Oracle configuration will fail if hostname does not resolve
-unless File.readlines('/etc/hosts').grep(/#{node['hostname']}/).size > 0
+if File.readlines('/etc/hosts').grep(/#{node['hostname']}/).empty?
   replace_or_add 'add_hostname_to_hosts' do
     path '/etc/hosts'
     pattern '127.0.0.1\s*localhost\s*.*'

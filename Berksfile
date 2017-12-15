@@ -1,9 +1,8 @@
-source 'https://api.berkshelf.com'
+source 'https://supermarket.chef.io'
 metadata
 
 group :integration do
   cookbook 'line'
   cookbook 'swap'
-  cookbook 'yum'
-  cookbook 'oracle-xe_test',      path: 'test/fixtures/cookbooks/oracle-xe_test'
+  cookbook 'oracle-xe_test', path: 'test/fixtures/cookbooks/oracle-xe_test'
 end

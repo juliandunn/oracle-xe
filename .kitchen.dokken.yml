@@ -1,0 +1,26 @@
+driver:
+  name: dokken
+  privileged: true # because Docker and SystemD/Upstart
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+  deprecations_as_errors: true
+
+platforms:
+- name: centos-6
+  driver:
+    image: centos:6
+
+- name: centos-7
+  driver:
+    image: centos:7
+
+suites:
+  - name: default
+    run_list: ["recipe[oracle-xe_test]", "recipe[oracle-xe]"]
+    attributes:
+      oracle-xe:
+        url: <%= ENV['ORACLE_XE_URL'] %>

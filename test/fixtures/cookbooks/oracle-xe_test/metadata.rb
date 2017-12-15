@@ -8,4 +8,3 @@ version          '0.1.0'
 
 depends 'line'
 depends 'swap'
-depends 'yum'
