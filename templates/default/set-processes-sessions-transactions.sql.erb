@@ -1,6 +1,6 @@
-Alter system set processes <%= node['oracle-xe']['processes'] %> scope = spfile;
-Alter system set sessions <%= node['oracle-xe']['sessions'] %> scope = spfile;
-Alter system set transactions <%= node['oracle-xe']['transactions'] %> scope = spfile;
+Alter system set processes = <%= node['oracle-xe']['processes'] %> scope = spfile;
+Alter system set sessions = <%= node['oracle-xe']['sessions'] %> scope = spfile;
+Alter system set transactions = <%= node['oracle-xe']['transactions'] %> scope = spfile;
 shutdown immediate;
 startup;
 EXIT;
